@@ -16,13 +16,13 @@ RUN apt-get update \
 
 #RUN RUN apt-add-repository ppa:git-core/ppa && apt-get update && apt-get install -y git
 
-RUN wget https://www.ffmpeg.org/releases/ffmpeg-4.0.2.tar.gz
-RUN tar -xzf ffmpeg-4.0.2.tar.gz; rm -r ffmpeg-4.0.2.tar.gz
-RUN cd ./ffmpeg-4.0.2; ./configure --enable-gpl --enable-libmp3lame --enable-decoder=mjpeg,png --enable-encoder=png --enable-openssl --enable-nonfree --enable-shared
+RUN wget https://www.ffmpeg.org/releases/ffmpeg-4.3.1.tar.gz
+RUN tar -xzf ffmpeg-4.3.1.tar.gz; rm -r ffmpeg-4.3.1.tar.gz
+RUN cd ./ffmpeg-4.3.1; ./configure --enable-gpl --enable-libmp3lame --enable-decoder=mjpeg,png --enable-encoder=png --enable-openssl --enable-nonfree --enable-shared
 
 
-RUN cd ./ffmpeg-4.0.2; make
-RUN  cd ./ffmpeg-4.0.2; make install
+RUN cd ./ffmpeg-4.3.1; make
+RUN  cd ./ffmpeg-4.3.1; make install
 
 #MAKE OPENCV
 RUN cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
