@@ -14,7 +14,7 @@ RUN apt-get update \
   && apt-get clean \
   && apt-get install -y --no-install-recommends libc6-dev libgdiplus wget software-properties-common
 
-RUN apt-get install libx264-dev
+RUN apt-get install -y libx264-dev
 
 #RUN RUN apt-add-repository ppa:git-core/ppa && apt-get update && apt-get install -y git
 
