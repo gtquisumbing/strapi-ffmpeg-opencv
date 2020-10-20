@@ -14,11 +14,13 @@ RUN apt-get update \
   && apt-get clean \
   && apt-get install -y --no-install-recommends libc6-dev libgdiplus wget software-properties-common
 
+RUN apt-get install libx264-dev
+
 #RUN RUN apt-add-repository ppa:git-core/ppa && apt-get update && apt-get install -y git
 
 RUN wget https://www.ffmpeg.org/releases/ffmpeg-4.3.1.tar.gz
 RUN tar -xzf ffmpeg-4.3.1.tar.gz; rm -r ffmpeg-4.3.1.tar.gz
-RUN cd ./ffmpeg-4.3.1; ./configure --enable-gpl --enable-libmp3lame --enable-decoder=mjpeg,png --enable-encoder=png --enable-openssl --enable-nonfree --enable-shared
+RUN cd ./ffmpeg-4.3.1; ./configure --enable-gpl --enable-libmp3lame --enable-decoder=mjpeg,png --enable-encoder=png --enable-openssl --enable-nonfree --enable-shared --enable-libx264
 
 
 RUN cd ./ffmpeg-4.3.1; make
