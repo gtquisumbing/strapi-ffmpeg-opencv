@@ -8,7 +8,7 @@ ARG BUILD_LIST=''
 #MAKE ffmpeg
 ######################################################################################################################
 ################################################# INSTALLING FFMPEG ##################################################
-RUN apt-get update ; apt-get install -y git build-essential gcc make yasm autoconf automake cmake libtool checkinstall libmp3lame-dev pkg-config libunwind-dev zlib1g-dev libssl-dev
+RUN apt-get update ; apt-get install -y git build-essential gcc make yasm autoconf automake cmake libtool checkinstall libmp3lame-dev pkg-config libunwind-dev zlib1g-dev libssl-dev libswresample-dev
 
 RUN apt-get update \
   && apt-get clean \
@@ -18,7 +18,7 @@ RUN apt-get install -y libx264-dev
 
 #RUN RUN apt-add-repository ppa:git-core/ppa && apt-get update && apt-get install -y git
 
-RUN wget https://www.ffmpeg.org/releases/ffmpeg-4.3.1.tar.gz
+RUN wget https://www.ffmpeg.org/releases/ffmpeg-4.3.1.tar.gz --no-check-certificate
 RUN tar -xzf ffmpeg-4.3.1.tar.gz; rm -r ffmpeg-4.3.1.tar.gz
 RUN cd ./ffmpeg-4.3.1; ./configure --enable-gpl --enable-libmp3lame --enable-decoder=mjpeg,png --enable-encoder=png --enable-openssl --enable-nonfree --enable-shared --enable-libx264
 
