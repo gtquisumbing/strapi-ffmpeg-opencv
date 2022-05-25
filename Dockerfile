@@ -1,6 +1,6 @@
-FROM strapi/base as strapi-opencv
+FROM stockpickle/base as strapi-opencv
 
-ARG OPENCV_VERSION=4.4.0
+ARG OPENCV_VERSION=4.5.2
 ARG WITH_CONTRIB=1
 ARG BUILD_WORLD=1
 ARG BUILD_LIST=''
@@ -18,13 +18,13 @@ RUN apt-get install -y libx264-dev
 
 #RUN RUN apt-add-repository ppa:git-core/ppa && apt-get update && apt-get install -y git
 
-RUN wget https://www.ffmpeg.org/releases/ffmpeg-4.3.1.tar.gz --no-check-certificate
-RUN tar -xzf ffmpeg-4.3.1.tar.gz; rm -r ffmpeg-4.3.1.tar.gz
-RUN cd ./ffmpeg-4.3.1; ./configure --enable-gpl --enable-libmp3lame --enable-decoder=mjpeg,png --enable-encoder=png --enable-openssl --enable-nonfree --enable-shared --enable-libx264
+RUN wget https://www.ffmpeg.org/releases/ffmpeg-4.3.3.tar.gz --no-check-certificate
+RUN tar -xzf ffmpeg-4.3.3.tar.gz; rm -r ffmpeg-4.3.3.tar.gz
+RUN cd ./ffmpeg-4.3.3; ./configure --enable-gpl --enable-libmp3lame --enable-decoder=mjpeg,png --enable-encoder=png --enable-openssl --enable-nonfree --enable-shared --enable-libx264
 
 
-RUN cd ./ffmpeg-4.3.1; make
-RUN  cd ./ffmpeg-4.3.1; make install
+RUN cd ./ffmpeg-4.3.3; make
+RUN  cd ./ffmpeg-4.3.3; make install
 
 #MAKE OPENCV
 RUN cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
@@ -48,10 +48,10 @@ RUN cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
   rm -rf /var/lib/apt/lists/* && \
   mkdir opencv && \
   cd opencv && \
-  wget https://github.com/Itseez/opencv/archive/${OPENCV_VERSION}.zip --no-check-certificate -O opencv-${OPENCV_VERSION}.zip && \
+  wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip --no-check-certificate -O opencv-${OPENCV_VERSION}.zip && \
   unzip opencv-${OPENCV_VERSION}.zip && \
   if [ -n "$WITH_CONTRIB" ]; then \
-  wget https://github.com/Itseez/opencv_contrib/archive/${OPENCV_VERSION}.zip --no-check-certificate -O opencv_contrib-${OPENCV_VERSION}.zip; \
+  wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip --no-check-certificate -O opencv_contrib-${OPENCV_VERSION}.zip; \
   unzip opencv_contrib-${OPENCV_VERSION}.zip; \
   fi && \
   mkdir opencv-${OPENCV_VERSION}/build && \
